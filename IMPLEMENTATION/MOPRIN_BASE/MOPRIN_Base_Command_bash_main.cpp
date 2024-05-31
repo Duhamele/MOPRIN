@@ -48,13 +48,13 @@ void MOPRIN_B_CB_Registre_Commande_Single(char cle,MOPRIN_B_CB_Action Commande) 
         if(Commande!=nullptr) {
                 if(MOPRIN_B_CB_DATA.action_char!=nullptr) {
                         realloc(MOPRIN_B_CB_DATA.action_char,(MOPRIN_B_CB_DATA.number_action_char+1)*sizeof(MOPRIN_Base_Command_Option_char_t));
-                        MOPRIN_B_CB_DATA.action_char[MOPRIN_B_CB_DATA.action_char].name=cle;
-                        MOPRIN_B_CB_DATA.action_char[MOPRIN_B_CB_DATA.action_char].action=Commande;
+                        MOPRIN_B_CB_DATA.action_char[MOPRIN_B_CB_DATA.number_action_char].name=cle;
+                        MOPRIN_B_CB_DATA.action_char[MOPRIN_B_CB_DATA.number_action_char].action=Commande;
                         MOPRIN_B_CB_DATA.number_action_char++;
                 }else {
                         MOPRIN_B_CB_DATA.action_char=(MOPRIN_Base_Command_Option_char_t*)malloc(sizeof(MOPRIN_Base_Command_Option_char_t));
-                        MOPRIN_B_CB_DATA.action_char[MOPRIN_B_CB_DATA.action_char].name=cle;
-                        MOPRIN_B_CB_DATA.action_char[MOPRIN_B_CB_DATA.action_char].action=Commande;
+                        MOPRIN_B_CB_DATA.action_char[MOPRIN_B_CB_DATA.number_action_char].name=cle;
+                        MOPRIN_B_CB_DATA.action_char[MOPRIN_B_CB_DATA.number_action_char].action=Commande;
                         MOPRIN_B_CB_DATA.number_action_char++;
                 }
         }
@@ -102,5 +102,33 @@ void MOPRIN_B_CB_Commande_Error_Default(mo_user_data data) {
         MOPRIN_B_CB_Run_Stop();
         fprintf(stderr,"Error Command\n");
 
+
+}
+void MOPRIN_B_CB_Select_Command_character(char option,mo_user_data data) {
+        for(int i=0;i<MOPRIN_B_CB_DATA.number_action_char;i++) {
+                if(MOPRIN_B_CB_DATA.action_char[i].name==option) {
+                        MOPRIN_B_CB_DATA.action_char[i].action(data);
+                        return;
+                }
+        }
+        MOPRIN_B_CB_DATA.action_error(data);
+        MOPRIN_B_CB_Run_Stop();
+}
+void MOPRIN_B_CB_Select_Command_string(mo_string option,mo_user_data data) {
+        for(int i=0;i<MOPRIN_B_CB_DATA.number_action_string;i++) {
+                if(strcmp(option,MOPRIN_B_CB_DATA.action_string[i].name)==0) {
+                        MOPRIN_B_CB_DATA.action_string[i].action(data);
+                        return;
+                }
+        }
+        MOPRIN_B_CB_DATA.action_error(data);
+        MOPRIN_B_CB_Run_Stop();
+}
+void MOPRIN_B_CB_Select_Command_argument(mo_string option,mo_user_data data) {
+        if(MOPRIN_B_CB_DATA.action_argument!=nullptr) {
+                MOPRIN_B_CB_DATA.action_argument(data);
+                return;
+        }
+        MOPRIN_B_CB_DATA.action_error(data);
 
 }
