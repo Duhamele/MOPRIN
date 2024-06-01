@@ -49,17 +49,36 @@ void MOPRIN_B_CB_Run(int argc, char *argv[],mo_user_data data);
  * @brief Stop the analyse of the command
  */
 void MOPRIN_B_CB_Run_Stop();
-void MOPRIN_B_CB_Set_Command_Default(MOPRIN_B_CB_Action Commande);
+
+/**
+ *
+ * @param number position of argument
+ * @return argument
+ * @note the function can use alone by the functions of MOPRIN_B_CB_Action type
+ */
+const char* MOPRIN_B_CB_Get_Argument_Command_Absolu(int number);
 
 /**
  * 
- * @param number position of argument
+ * @param number positive of argument relative to the argument
  * @return argument
- * @note
+ * @note the function can use alone by the fonctions of MOPRIN_B_CB_Action type
  */
-const char* MOPRIN_B_CB_Get_Argument_Command_Absolu(int number);
 char* MOPRIN_B_CB_Get_Argument_Command_Relative(int number);
+
+/**
+ * @brief set the Error Command
+ * @param Command use by the error code
+ * @note to see also MOPRIN_B_CB_Action
+ * @note to see also MOPRIN_B_Comand_Bash_Init()
+ */
 void MOPRIN_B_CB_Set_Command_Default_Error(MOPRIN_B_CB_Action Command);
+
+/**
+ * @brief Done advance the position of analyse on the arguments
+ * @param number the number of position advance
+ * @note the function can use alone by the functions of MOPRIN_B_CB_Action type
+ */
 void MOPRIN_B_CB_UP(int number);
 
 
