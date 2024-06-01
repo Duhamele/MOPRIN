@@ -50,10 +50,17 @@ void MOPRIN_B_CB_Run(int argc, char *argv[],mo_user_data data);
  */
 void MOPRIN_B_CB_Run_Stop();
 void MOPRIN_B_CB_Set_Command_Default(MOPRIN_B_CB_Action Commande);
-char* MOPRIN_B_CB_Get_Argument_Command_Absolu(int number);
+
+/**
+ * 
+ * @param number position of argument
+ * @return argument
+ * @note
+ */
+const char* MOPRIN_B_CB_Get_Argument_Command_Absolu(int number);
 char* MOPRIN_B_CB_Get_Argument_Command_Relative(int number);
-int MOPRIN_B_CB_Get_Command_Number();
 void MOPRIN_B_CB_Set_Command_Default_Error(MOPRIN_B_CB_Action Command);
+void MOPRIN_B_CB_UP(int number);
 
 
 

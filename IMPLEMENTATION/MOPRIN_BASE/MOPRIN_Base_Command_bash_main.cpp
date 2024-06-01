@@ -8,6 +8,9 @@
 bool     MOPRIN_Base_run;
 u_int64_t MOPRIN_Base_arg;
 MOPRIN_Base_Data MOPRIN_B_CB_DATA;
+int MOPRIN_B_CB_Argc;
+int MOPRIN_B_CB_Adv;
+char** MOPRIN_B_CB_argv;
 
 void MOPRIN_B_CB_Run_Stop() {
         MOPRIN_Base_run=false;
@@ -15,7 +18,10 @@ void MOPRIN_B_CB_Run_Stop() {
 void MOPRIN_B_CB_Run(int argc, char *argv[],mo_user_data data) {
         MOPRIN_Base_run=true;
         MOPRIN_Base_arg=1;
+        MOPRIN_B_CB_argv=argv;
+        MOPRIN_B_CB_Argc=argc;
         while (MOPRIN_Base_run&&MOPRIN_Base_arg<argc) {
+                MOPRIN_B_CB_Adv=0;
                 if(argv[MOPRIN_Base_arg][0]=='-') {
                         //string option
                         if(argv[MOPRIN_Base_arg][1]=='-') {
@@ -34,7 +40,7 @@ void MOPRIN_B_CB_Run(int argc, char *argv[],mo_user_data data) {
                 }else {
                         MOPRIN_B_CB_Select_Command_argument(argv[MOPRIN_Base_arg],data);
                 }
-                MOPRIN_Base_arg++;
+                MOPRIN_Base_arg+=MOPRIN_B_CB_Adv+1;
         }
 
 }
@@ -92,9 +98,12 @@ void MOPRIN_B_CB_Release() {
 void MOPRIN_B_CB_Set_Command_Agr(MOPRIN_B_CB_Action Commande) {
         MOPRIN_B_CB_DATA.action_argument=Commande;
 }
-char* MOPRIN_B_CB_Get_Argument_Command_Absolu(int number){}
-char* MOPRIN_B_CB_Get_Argument_Command_Relative(int number){}
-int MOPRIN_B_CB_Get_Command_Number(){}
+const char* MOPRIN_B_CB_Get_Argument_Command_Absolu(int number) {
+        return MOPRIN_B_CB_argv[number];
+}
+char* MOPRIN_B_CB_Get_Argument_Command_Relative(int number) {
+        return MOPRIN_B_CB_argv[number+MOPRIN_Base_arg];
+}
 void MOPRIN_B_CB_Set_Command_Default_Error(MOPRIN_B_CB_Action Command) {
         MOPRIN_B_CB_DATA.action_error=Command;
 }
@@ -131,4 +140,7 @@ void MOPRIN_B_CB_Select_Command_argument(mo_string option,mo_user_data data) {
         }
         MOPRIN_B_CB_DATA.action_error(data);
 
+}
+void MOPRIN_B_CB_UP(int number) {
+        MOPRIN_B_CB_Adv+=number;
 }
