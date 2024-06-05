@@ -17,4 +17,4 @@ add_library(MOPRIN_BASE STATIC ${LIB_MOPRIN_BASE})
 #test MOPRIN BASE CB
 add_executable(test_mo_b_cb ${TEST}/Test_Moprin_Base_Command_Bash.cpp)
 target_link_libraries(test_mo_b_cb MOPRIN_BASE)
-add_test(Test_Bse_Command test_mo_b_cb -h)
+add_test(Test_Bse_Command test_mo_b_cb -h --help)
