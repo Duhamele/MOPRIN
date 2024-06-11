@@ -31,7 +31,7 @@ void MOPRIN_B_CB_Run(int argc, char *argv[],mo_user_data data) {
                                 u_int64_t number_argv=MOPRIN_Base_arg;
                                 int number_i=1;
                                 size_t number_max=strlen(argv[MOPRIN_Base_arg]);
-                                while (number_i<number_max) {
+                                while (number_i<number_max && MOPRIN_Base_run) {
                                         MOPRIN_B_CB_Select_Command_character(argv[number_argv][number_i],data);
                                         number_i++;
                                 }

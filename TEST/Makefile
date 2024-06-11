@@ -21,3 +21,4 @@ Test:Test_cb
 	./${TEMP}Test_CB -h
 	./${TEMP}Test_CB -ph af
 	./${TEMP}Test_CB -p af -h
+	./${TEMP}Test_CB -qh
