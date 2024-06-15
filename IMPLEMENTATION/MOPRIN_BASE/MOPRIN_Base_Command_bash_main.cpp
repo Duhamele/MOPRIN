@@ -104,10 +104,10 @@ const char* MOPRIN_B_CB_Get_Argument_Command_Absolu(int number) {
 char* MOPRIN_B_CB_Get_Argument_Command_Relative(int number) {
         return MOPRIN_B_CB_argv[number+MOPRIN_Base_arg];
 }
-void MOPRIN_B_CB_Set_Command_Default_Error(MOPRIN_B_CB_Action Command) {
+void MOPRIN_B_CB_Set_Command_Default_Error(MOPRIN_b_CB_Error Command) {
         MOPRIN_B_CB_DATA.action_error=Command;
 }
-void MOPRIN_B_CB_Commande_Error_Default(mo_user_data data) {
+void MOPRIN_B_CB_Commande_Error_Default(mo_user_data data,MOPRIN_b_CB_Error_t Error) {
         MOPRIN_B_CB_Run_Stop();
         fprintf(stderr,"Error Command\n");
 
@@ -120,7 +120,10 @@ void MOPRIN_B_CB_Select_Command_character(char option,mo_user_data data) {
                         return;
                 }
         }
-        MOPRIN_B_CB_DATA.action_error(data);
+        MOPRIN_b_CB_Error_t err;
+        err.type=char_error;
+        err.param.chactare=option;
+        MOPRIN_B_CB_DATA.action_error(data,err);
         MOPRIN_B_CB_Run_Stop();
 }
 void MOPRIN_B_CB_Select_Command_string(mo_string option,mo_user_data data) {
@@ -130,7 +133,10 @@ void MOPRIN_B_CB_Select_Command_string(mo_string option,mo_user_data data) {
                         return;
                 }
         }
-        MOPRIN_B_CB_DATA.action_error(data);
+        MOPRIN_b_CB_Error_t err;
+        err.type=string_error;
+        err.param.string=option;
+        MOPRIN_B_CB_DATA.action_error(data,err);
         MOPRIN_B_CB_Run_Stop();
 }
 void MOPRIN_B_CB_Select_Command_argument(mo_string option,mo_user_data data) {
@@ -138,7 +144,10 @@ void MOPRIN_B_CB_Select_Command_argument(mo_string option,mo_user_data data) {
                 MOPRIN_B_CB_DATA.action_argument(data);
                 return;
         }
-        MOPRIN_B_CB_DATA.action_error(data);
+        MOPRIN_b_CB_Error_t err;
+        err.type=arg_error;
+        err.param.string=option;
+        MOPRIN_B_CB_DATA.action_error(data,err);
 
 }
 void MOPRIN_B_CB_UP(int number) {

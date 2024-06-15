@@ -1,5 +1,7 @@
 #ifndef MOPRIN_BASE_LIBRARY_H
 #define MOPRIN_BASE_LIBRARY_H
+#include <MOPRIN_Base_Type.h>
+
 #include "MOPRIN_Base_Type.h"
 
 
@@ -72,7 +74,7 @@ char* MOPRIN_B_CB_Get_Argument_Command_Relative(int number);
  * @note to see also MOPRIN_B_CB_Action
  * @note to see also MOPRIN_B_Comand_Bash_Init()
  */
-void MOPRIN_B_CB_Set_Command_Default_Error(MOPRIN_B_CB_Action Command);
+void MOPRIN_B_CB_Set_Command_Default_Error(MOPRIN_b_CB_Error Command);
 
 /**
  * @brief Done advance the position of analyse on the arguments
