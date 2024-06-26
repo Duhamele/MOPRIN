@@ -4,7 +4,7 @@
 
 #ifndef MOPRIN_BASE_TL_INT_H
 #define MOPRIN_BASE_TL_INT_H
-#include "MOPRIN_Base_Type.h"
+#include "MOPRIN_Base_TL_Type.h"
 //Registre Formale
 enum Symbol_type {
         chart,

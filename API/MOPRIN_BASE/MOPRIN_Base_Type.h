@@ -29,9 +29,5 @@ typedef void (*MOPRIN_b_CB_Error) (mo_user_data data,MOPRIN_b_CB_Error_t error);
 /**
  * Type use by Moprin Base TL
  */
-typedef void* mo_entry_data;
-typedef void* mo_ext_data;
-typedef void (*MOPRIN_B_TL_Opération) (mo_entry_data donnée,mo_ext_data résultat);
-typedef void* mo_tl_formula;
-typedef void* mo_symbole;
+
 #endif //MOPRIN_BASE_TYPE_H
