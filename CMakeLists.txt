@@ -20,5 +20,7 @@ target_link_libraries(test_mo_b_cb MOPRIN_BASE_CB)
 add_test(Test_Bse_Command test_mo_b_cb -h --help)
 
 #MOPRIN BASE TL
-set(LIB_MOPRIN_B_TL ${SRC_MOPRIN_BASE}/MOPRIN_Base_TL_int.cpp)
+set(LIB_MOPRIN_B_TL ${SRC_MOPRIN_BASE}/MOPRIN_Base_TL_int.cpp
+        IMPLEMENTATION/MOPRIN_BASE/MOPRIN_BASE_TL_Grammar.cpp
+        IMPLEMENTATION/MOPRIN_BASE/MOPRIN_BASE_TL_Grammar.h)
 add_library(MOPRIN_BASE_TL STATIC ${LIB_MOPRIN_B_TL})
