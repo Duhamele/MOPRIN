@@ -8,10 +8,13 @@
 #include <MOPRIN_Base_TL_Type.h>
 #include <MOPRIN_Base_Type.h>
 
+#include "MOPRIN_BASE_TL_FORMULA.h"
+
 
 class MOPRIN_BASE_TL_Grammar {
         mo_string name=nullptr;
-        std::pmr::list<mo_tl_formula> formula_list={};
+        std::list<MOPRIN_BASE_TL_FORMULA> list_right={};
+
 
 };
 
